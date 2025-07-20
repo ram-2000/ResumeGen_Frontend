@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { checkHealth } from "@/lib/api";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const { data, isLoading, isError } = useQuery({

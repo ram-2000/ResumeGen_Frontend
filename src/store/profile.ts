@@ -4,11 +4,19 @@ import { Profile } from "@/lib/schema";
 import { createId } from "@paralleldrive/cuid2";
 import { getRandomAvatar, sampleAvatars } from "@/lib/avatars";
 
+interface AtsScore {
+  score: number;
+  match_rate: number;
+  missing_keywords: string[];
+  summary: string;
+  matched_keywords: string[];
+}
+
 interface ResumeResult {
   job_id: string;
   pdf_filename: string;
   download_url: string;
-  ats_score: any;
+  ats_score: AtsScore;
   timestamp: string;
 }
 

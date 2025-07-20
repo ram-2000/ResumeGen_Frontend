@@ -33,7 +33,7 @@ export default function ProfileDetails({ setEditing }: { setEditing: (editing: b
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>{profile.name}'s Profile</CardTitle>
+        <CardTitle>{profile.name}&apos;s Profile</CardTitle>
         <div className="flex gap-2">
           <Button onClick={() => setEditing(true)}>Edit Profile</Button>
           <AlertDialog>

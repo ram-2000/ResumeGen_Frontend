@@ -7,6 +7,10 @@ import ProfileDetails from "@/components/profile/ProfileDetails";
 import ProfileForm from "@/components/profile/ProfileForm";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { educationSchema } from "@/lib/schema";
+import { z } from "zod";
+
+type Education = z.infer<typeof educationSchema> & { duration?: string };
 
 export default function ProfilePage() {
   const { profiles, selectedProfileId, resetProfiles, addProfile } = useProfileStore();
@@ -39,7 +43,7 @@ export default function ProfilePage() {
           }
 
           if (json.education) {
-            json.education = json.education.map((edu: any) => {
+            json.education = json.education.map((edu: Education) => {
               if (edu.duration) {
                 const [start_date, end_date] = edu.duration.split(' -- ');
                 return { ...edu, start_date, end_date: end_date || 'Present' };
@@ -50,7 +54,7 @@ export default function ProfilePage() {
 
           addProfile(json);
           toast.success("Profile imported successfully!");
-        } catch (error) {
+        } catch {
           toast.error("Invalid JSON file or data structure.");
         }
       };

@@ -20,6 +20,20 @@ import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
 import Stepper from "@/components/generate/Stepper";
 
+interface GenerationResult {
+  ats_score: {
+    score: number;
+    match_rate: number;
+    missing_keywords: string[];
+    summary: string;
+    matched_keywords: string[];
+  };
+  download_url: string;
+  job_id: string;
+  pdf_filename: string;
+  timestamp: string;
+}
+
 export default function GeneratePage() {
   const { profiles, history, addHistory } = useProfileStore();
   const [selectedProfileId, setSelectedProfileId] = useState<string | null>(
@@ -27,7 +41,7 @@ export default function GeneratePage() {
   );
   const [jobDescription, setJobDescription] = useState("");
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<GenerationResult | null>(null);
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,7 +71,7 @@ export default function GeneratePage() {
       addHistory({ ...data, timestamp: new Date().toISOString() });
       toast.success("Resume generated successfully!");
       setCurrentStep(5);
-    } catch (error) {
+    } catch {
       toast.error("Failed to generate resume.");
     } finally {
       setLoading(false);
@@ -116,7 +130,7 @@ export default function GeneratePage() {
           )}
           {result && (
             <>
-              <AtsScore {...result.ats_score} />
+              <AtsScore ats_score={result.ats_score} />
               <Card>
                 <CardHeader>
                   <CardTitle>Download</CardTitle>
