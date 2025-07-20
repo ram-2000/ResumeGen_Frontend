@@ -136,7 +136,7 @@ export default function GeneratePage() {
                 </CardHeader>
                 <CardContent>
                   <a
-                    href={`http://127.0.0.1:8001${result.download_url}`}
+                    href={`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8001'}${result.download_url}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full"
@@ -166,7 +166,7 @@ export default function GeneratePage() {
                                     </p>
                                 </div>
                                 <a
-                                    href={`http://127.0.0.1:8001${item.download_url}`}
+                                    href={`${process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8001'}${item.download_url}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
