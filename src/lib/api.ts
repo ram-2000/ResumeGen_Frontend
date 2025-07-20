@@ -2,7 +2,7 @@ import axios from "axios";
 import { Profile, ApiProfile } from "./schema";
 
 const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://resumegen-cewo.onrender.com",
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "https://resumegen-ovy4.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },
