@@ -23,10 +23,9 @@ import Stepper from "@/components/generate/Stepper";
 interface GenerationResult {
   ats_score: {
     score: number;
-    match_rate: number;
-    missing_keywords: string[];
     summary: string;
-    matched_keywords: string[];
+    matched: string[];
+    missing: string[];
   };
   download_url: string;
   job_id: string;
@@ -156,7 +155,9 @@ export default function GeneratePage() {
             <Card>
                 <CardContent className="p-0">
                     <div className="divide-y">
-                        {history.map((item) => (
+                        {history.map((item) => {
+                            if (!item || !item.job_id) return null;
+                            return (
                             <div key={item.job_id} className="p-4 flex justify-between items-center">
                                 <div>
                                     <p className="font-semibold">{item.pdf_filename}</p>
@@ -172,7 +173,7 @@ export default function GeneratePage() {
                                     <Button variant="outline">Download</Button>
                                 </a>
                             </div>
-                        ))}
+                        )})}
                     </div>
                 </CardContent>
             </Card>

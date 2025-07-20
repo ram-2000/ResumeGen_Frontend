@@ -5,18 +5,30 @@ import { Progress } from "@/components/ui/progress";
 
 interface AtsScoreData {
   score: number;
-  match_rate: number;
-  missing_keywords: string[];
   summary: string;
-  matched_keywords: string[];
+  matched: string[];
+  missing: string[];
 }
 
 interface AtsScoreProps {
-  ats_score: AtsScoreData;
+  ats_score?: AtsScoreData;
 }
 
 export default function AtsScore({ ats_score }: AtsScoreProps) {
-  const { score, summary, matched_keywords, missing_keywords } = ats_score;
+  if (!ats_score) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>ATS Score</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p>ATS score data is not available.</p>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const { score, summary, matched, missing } = ats_score;
   return (
     <Card>
       <CardHeader>
@@ -35,7 +47,7 @@ export default function AtsScore({ ats_score }: AtsScoreProps) {
           <div>
             <h3 className="font-semibold text-green-600">Matched Keywords</h3>
             <ul className="list-disc list-inside">
-              {matched_keywords.map((keyword, index) => (
+              {(matched || []).map((keyword, index) => (
                 <li key={index}>{keyword}</li>
               ))}
             </ul>
@@ -43,7 +55,7 @@ export default function AtsScore({ ats_score }: AtsScoreProps) {
           <div>
             <h3 className="font-semibold text-red-600">Missing Keywords</h3>
             <ul className="list-disc list-inside">
-              {missing_keywords.map((keyword, index) => (
+              {(missing || []).map((keyword, index) => (
                 <li key={index}>{keyword}</li>
               ))}
             </ul>

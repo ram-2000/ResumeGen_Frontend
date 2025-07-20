@@ -6,10 +6,9 @@ import { getRandomAvatar, sampleAvatars } from "@/lib/avatars";
 
 interface AtsScore {
   score: number;
-  match_rate: number;
-  missing_keywords: string[];
   summary: string;
-  matched_keywords: string[];
+  matched: string[];
+  missing: string[];
 }
 
 interface ResumeResult {
